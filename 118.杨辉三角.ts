@@ -11,10 +11,9 @@ function generate(numRows: number): number[][] {
     }
     const lines = generate(numRows - 1);
     const lastLine = lines[lines.length - 1];
-    const virtualLine = [0, ...lastLine, 0];
-    const thisLine: number[] = [];
-    for (let i = 0; i < numRows; i += 1) {
-        thisLine.push(virtualLine[i] + virtualLine[i + 1]);
+    const thisLine = new Array(numRows).fill(1);
+    for (let i = 1; i < numRows - 1; i += 1) {
+        thisLine[i] = lastLine[i - 1] + lastLine[i];
     }
     lines.push(thisLine);
     return lines;
