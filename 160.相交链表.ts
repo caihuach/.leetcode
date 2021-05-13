@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=141 lang=typescript
+ * @lc app=leetcode.cn id=160 lang=typescript
  *
- * [141] 环形链表
+ * [160] 相交链表
  */
 
 // @lc code=start
@@ -26,19 +26,29 @@
 //     }
 // }
 
-function hasCycle(head: ListNode | null): boolean {
-    if (!head) {
-        return false;
+function getIntersectionNode(
+    headA: ListNode | null,
+    headB: ListNode | null
+): ListNode | null {
+    let i = headA,
+        j = headB;
+    if (!i || !j) {
+        return null;
     }
-    let slow: ListNode | null = head,
-        fast: ListNode | null = head.next;
-    while (fast && fast.next) {
-        slow = slow!.next;
-        fast = fast.next.next;
-        if (slow === fast) {
-            return true;
+
+    while (i !== j) {
+        if (i) {
+            i = i.next;
+        } else {
+            i = headB;
+        }
+        if (j) {
+            j = j.next;
+        } else {
+            j = headA;
         }
     }
-    return false;
+
+    return i;
 }
 // @lc code=end
