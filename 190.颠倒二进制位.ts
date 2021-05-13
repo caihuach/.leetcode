@@ -6,8 +6,11 @@
 
 // @lc code=start
 function reverseBits(n: number): number {
-    const rn = n.toString(2).padStart(32, '0').split('').reverse().join('');
-
-    return parseInt(rn, 2);
+    let res = 0;
+    for (let i = 0; i < 32; i += 1) {
+        res = (res << 1) | (n & 1);
+        n >>>= 1;
+    }
+    return res >>> 0;
 }
 // @lc code=end

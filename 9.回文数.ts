@@ -21,10 +21,10 @@ function isPalindrome(x: number): boolean {
 
     while (y > revY) {
         revY = revY * 10 + (y % 10);
-        y = Math.floor(y / 10);
+        y = (y / 10) | 0;
     }
 
-    return y === revY || y === Math.floor(revY / 10);
+    return y === revY || y === ((revY / 10) | 0);
 }
 
 // @lc code=end
