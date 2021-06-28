@@ -35,22 +35,21 @@ function minDepth(root: TreeNode | null): number {
         return 0;
     }
     let minHeight = 1;
-    let arr = [root];
-    while (arr.length) {
-        const tempArr: TreeNode[] = [];
-        while (arr.length) {
-            const node = arr.pop();
+    let queue = [root];
+    while (queue.length) {
+        const len = queue.length;
+        for (let i = 0; i < len; i += 1) {
+            const node = queue.shift();
             if (!node?.left && !node?.right) {
                 return minHeight;
             }
             if (node.left) {
-                tempArr.push(node.left);
+                queue.push(node.left);
             }
             if (node.right) {
-                tempArr.push(node.right);
+                queue.push(node.right);
             }
         }
-        arr = tempArr;
         minHeight += 1;
     }
     return minHeight;

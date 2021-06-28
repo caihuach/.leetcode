@@ -7,15 +7,16 @@
 // @lc code=start
 function maxProfit(prices: number[]): number {
     const n = prices.length;
-    if (n < 2) {
-        return 0;
-    }
-    const dp = new Array(n).fill(0);
-    let minPrice = prices[0];
+    // 初始化状态
+    let dp_i_0 = 0,
+        dp_i_1 = -prices[0];
     for (let i = 1; i < n; i += 1) {
-        dp[i] = Math.max(dp[i - 1], prices[i] - minPrice);
-        minPrice = Math.min(minPrice, prices[i]);
+        // 空仓
+        dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+        // 持仓
+        // 只能买一次
+        dp_i_1 = Math.max(dp_i_1, -prices[i]);
     }
-    return dp[n - 1];
+    return dp_i_0;
 }
 // @lc code=end

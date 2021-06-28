@@ -10,15 +10,18 @@ const { max } = Math;
 
 function maxProfit(prices: number[]): number {
     const n = prices.length;
-    if (n < 2) {
-        return 0;
-    }
 
-    let res = 0;
+    let dp_i_0 = 0,
+        dp_i_1 = -prices[0];
+
     for (let i = 1; i < n; i += 1) {
-        res += max(0, prices[i] - prices[i - 1]);
+        // 空仓，持仓
+        [dp_i_0, dp_i_1] = [
+            max(dp_i_0, dp_i_1 + prices[i]),
+            max(dp_i_1, dp_i_0 - prices[i]),
+        ];
     }
-    return res;
+    return dp_i_0;
 }
 
 // @lc code=end

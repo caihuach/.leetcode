@@ -6,7 +6,11 @@
 
 // @lc code=start
 function twoSum(nums: number[], target: number): number[] {
-    const dict = {};
+    nums.sort(function (a, b) {
+        return a - b;
+    });
+    let i = 0,j = nums.length-1;
+    
     for (let [i, num] of nums.entries()) {
         const remain = target - num;
         if (remain in dict) {
