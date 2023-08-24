@@ -6,18 +6,17 @@
 
 // @lc code=start
 function twoSum(nums: number[], target: number): number[] {
-    nums.sort(function (a, b) {
-        return a - b;
-    });
-    let i = 0,j = nums.length-1;
-    
-    for (let [i, num] of nums.entries()) {
-        const remain = target - num;
-        if (remain in dict) {
-            return [dict[remain], i];
+    let pair: number[] = [];
+    const diff: { [n: number]: number } = {}
+    for (let i = 0; i < nums.length; i += 1) {
+        if (target - nums[i] in diff) {
+            pair = [diff[target - nums[i]], i];
+            break;
+        } else {
+            diff[nums[i]] = i;
         }
-        dict[num] = i;
     }
-    return [-1, -1];
-}
+    return pair;
+};
 // @lc code=end
+

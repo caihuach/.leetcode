@@ -3,18 +3,20 @@
 #
 # [1] 两数之和
 #
-from typing import List, Dict
+
 
 # @lc code=start
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        obj: Dict[str, int] = {}
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        pair: list[int] = []
+        diff: dict[int, int] = {}
         for i, num in enumerate(nums):
-            remain = target - num
-            if remain in obj:
-                return [obj[remain], i]
-            obj[num] = i
-        return [-1, -1]
+            if target - num in diff:
+                pair = [diff[target - num], i]
+                break
+            else:
+                diff[num] = i
+        return pair
 
 
 # @lc code=end
