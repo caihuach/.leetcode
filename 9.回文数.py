@@ -4,24 +4,21 @@
 # [9] 回文数
 #
 
+
 # @lc code=start
 class Solution:
     def isPalindrome(self, x: int) -> bool:
         if x < 0:
             return False
-        if x < 10:
-            return True
-        if x % 10 == 0:
+        x, remainder = divmod(x, 10)
+        if remainder == 0 and x > 0:
             return False
+        reversal = remainder
+        while x > reversal:
+            x, remainder = divmod(x, 10)
+            reversal = reversal * 10 + remainder
 
-        y = x
-        revY = 0
-
-        while y > revY:
-            revY = revY * 10 + y % 10
-            y = y // 10
-
-        return y == revY or y == revY // 10
+        return x == reversal or x == reversal // 10
 
 
 # @lc code=end

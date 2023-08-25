@@ -4,6 +4,7 @@
 # [13] 罗马数字转整数
 #
 
+
 # @lc code=start
 class Solution:
     def romanToInt(self, s: str) -> int:
@@ -22,12 +23,17 @@ class Solution:
             "V": 5,
             "I": 1,
         }
-        result = 0
-        copy = s
-        for sym in numMap:
-            while sym in copy:
-                result += numMap[sym]
-                copy = copy.replace(sym, "", 1)
+        sum = 0
+        i = 0
+        while i < len(s):
+            two = s[i : i + 2]
+            if two in numMap:
+                sum += numMap[two]
+                i += 2
+            else:
+                sum += numMap[s[i]]
+                i += 1
+        return sum
 
-        return result
+
 # @lc code=end

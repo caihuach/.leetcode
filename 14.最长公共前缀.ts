@@ -6,33 +6,27 @@
 
 // @lc code=start
 function longestCommonPrefix(strs: string[]): string {
-    if (strs.length === 0) {
-        return '';
-    }
-    if (strs.length === 1) {
+    // only one string || first string empty
+    if (strs.length === 1 || !strs[0].length) {
         return strs[0];
     }
-    // 随便拿最后一个元素
-    let prefix = strs.pop() || '';
-
-    for (const str of strs) {
-        prefix = getPrefix(prefix, str);
-        if (!prefix) {
+    // to collect prefix char
+    const prefixChars = [''];
+    // use first string as base
+    for (let i = 0; i < strs[0].length; i += 1) {
+        let char = strs[0][i];
+        for (let j = 1; j < strs.length; j += 1) {
+            // jth string length exceeds || different char
+            if (i >= strs[j].length || strs[j][i] !== char) {
+                char = '';
+                break;
+            }
+        }
+        if (!char) {
             break;
         }
+        prefixChars.push(char);
     }
-
-    return prefix;
-}
-
-function getPrefix(prefix: string, str: string): string {
-    let newPrefix = '';
-    for (let i = 0; i < prefix.length; i++) {
-        if (prefix[i] !== str[i]) {
-            break;
-        }
-        newPrefix += prefix[i];
-    }
-    return newPrefix;
+    return prefixChars.join('');
 }
 // @lc code=end

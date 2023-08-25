@@ -21,15 +21,19 @@ function romanToInt(s: string): number {
         V: 5,
         I: 1,
     };
-    let result = 0;
-    let copy = s;
-    for (const sym in numMap) {
-        while (copy.includes(sym)) {
-            result += numMap[sym];
-            copy = copy.replace(sym, '');
+
+    let sum = 0;
+    let i = 0;
+    while (i < s.length) {
+        const two = s.slice(i, i + 2);
+        if (two in numMap) {
+            sum += numMap[two];
+            i += 2;
+        } else {
+            sum += numMap[s[i]];
+            i += 1;
         }
     }
-
-    return result;
+    return sum;
 }
 // @lc code=end

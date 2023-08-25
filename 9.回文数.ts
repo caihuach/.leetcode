@@ -9,22 +9,18 @@ function isPalindrome(x: number): boolean {
     if (x < 0) {
         return false;
     }
-    if (x < 10) {
-        return true;
-    }
-    if (x % 10 === 0) {
+    let reminder = x % 10;
+    x = (x - reminder) / 10;
+    if (reminder === 0 && x > 0) {
         return false;
     }
-
-    let y = x;
-    let revY = 0;
-
-    while (y > revY) {
-        revY = revY * 10 + (y % 10);
-        y = (y / 10) | 0;
+    let reversal = reminder;
+    while (x > reversal) {
+        reminder = x % 10;
+        reversal = reversal * 10 + reminder;
+        x = (x - reminder) / 10;
     }
 
-    return y === revY || y === ((revY / 10) | 0);
+    return x === reversal || x === Math.floor(reversal / 10);
 }
-
 // @lc code=end
